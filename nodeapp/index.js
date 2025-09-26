@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const userRouter = require("./routers/userRouter");
-const recipeRouter = require("./routers/recipeRouter");
+const ideaRoutes = require("./routes/ideaRoutes");
 
 const app = express();
 app.use(express.json());
@@ -29,6 +28,6 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-  app.use("/user", userRouter);
-  app.use("/recipes", recipeRouter);
+ 
   
+  app.use("/api/ideas", ideaRoutes);
