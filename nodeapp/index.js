@@ -1,33 +1,35 @@
+// index.js
 const express = require("express");
-const mongoose = require("mongoose");
 const ideaRoutes = require("./routes/ideaRoutes");
+const cors = require("cors");
 
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const cors = require("cors"); // Import the cors package
-const corsOptions = {
-  origin: "*", // Replace with the URL of your frontend application
+
+// Enable CORS
+app.use(cors({
+  origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
   allowedHeaders: "Content-Type,Authorization",
-};
+}));
 
+app.use("/api/ideas", ideaRoutes);
 
-// Enable CORS with the specified options
-app.use(cors(corsOptions));
-mongoose
-  .connect("mongodb://127.0.0.1:27017/demoname")
-  .then(() => {
-    console.log("Database connected");
-    app.listen(8080, () => {
-      console.log("API is running in PORT:8080");
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
- 
-  
-  app.use("/api/ideas", ideaRoutes);
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
+// Only start server if not in test
+if (process.env.NODE_ENV !== "test") {
+  const mongoose = require("mongoose");
+  mongoose.connect("mongodb+srv://username:password@cluster0.mongodb.net/dbname")
+    .then(() => console.log("DB connected"))
+    .catch(err => console.log(err));
+
+  app.listen(8080, () => console.log("API running on port 8080"));
+}
+
+module.exports = app;  // export app for supertest
