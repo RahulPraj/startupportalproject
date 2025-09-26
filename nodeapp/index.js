@@ -25,7 +25,7 @@ app.use((req, res) => {
 // Only start server if not in test
 if (process.env.NODE_ENV !== "test") {
   const mongoose = require("mongoose");
-  mongoose.connect("mongodb+srv://username:password@cluster0.mongodb.net/dbname")
+  mongoose.connect("mongodb+srv://rahul971801_db_user:FHqrkkfn34YN78Xw@cluster0.5jwzecj.mongodb.net/?retryWrites=true&w=majority")
     .then(() => console.log("DB connected"))
     .catch(err => console.log(err));
 
