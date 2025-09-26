@@ -15,7 +15,9 @@ app.use(cors({
   allowedHeaders: "Content-Type,Authorization",
 }));
 
+
 app.use("/api/ideas", ideaRoutes);
+
 
 // 404 handler
 app.use((req, res) => {
@@ -32,4 +34,4 @@ if (process.env.NODE_ENV !== "test") {
   app.listen(8080, () => console.log("API running on port 8080"));
 }
 
-module.exports = app;  // export app for supertest
+

@@ -1,7 +1,7 @@
 // src/services/api.js
 import axios from 'axios';
 
-const API_URL = 'https://8080-fddecedccde329052728bccfaccecftwo.premiumproject.examly.io/api';
+const API_URL = 'https://8080-ecefccaacaee334948288bdfddbacaacfbcfour.premiumproject.examly.io/api';
 
 // Get all ideas
 export const getIdeas = async () => {
